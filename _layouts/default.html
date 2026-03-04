@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title | default: site.title }}</title>
+    <meta name="description" content="{{ site.description }}">
+    <link rel="stylesheet" href="/assets/css/site.css">
+  </head>
+  <body>
+    <div class="page">
+      <aside class="sidebar">
+        <div class="profile">
+          {% if site.data.profile.profile_image %}
+          <img class="profile-image" src="{{ site.data.profile.profile_image }}" alt="{{ site.data.profile.name }}">
+          {% else %}
+          <div class="profile-fallback">{{ site.data.profile.name | slice: 0 }}</div>
+          {% endif %}
+          <h1 class="name">{{ site.data.profile.name }}</h1>
+          <p class="meta">{{ site.data.profile.description }}</p>
+          <p class="meta-line"><span class="icon">📞</span>{{ site.data.profile.phone }}</p>
+          <p class="meta-line"><span class="icon">✉️</span><a href="mailto:{{ site.data.profile.email }}">{{ site.data.profile.email }}</a></p>
+          <p class="meta-line"><img class="icon-svg" src="/assets/icons/github.svg" alt=""><a href="{{ site.data.profile.github }}" target="_blank" rel="noreferrer noopener">GitHub</a></p>
+        </div>
+      </aside>
+      <main class="content">
+        {{ content }}
+      </main>
+    </div>
+  </body>
+</html>
