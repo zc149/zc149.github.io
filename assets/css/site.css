@@ -50,11 +50,11 @@ body {
 
 .profile-image,
 .profile-fallback {
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   display: block;
-  margin-bottom: 16px;
+  margin: 0 auto 16px;
 }
 
 .profile-image {
@@ -305,6 +305,12 @@ body {
     padding: 24px 20px;
   }
 
+  .profile-image,
+  .profile-fallback {
+    width: 120px;
+    height: 120px;
+  }
+
   .content {
     padding: 32px 24px;
   }
@@ -326,5 +332,122 @@ body {
   #experience ~ h3 {
     padding-left: 24px;
     border-left: none;
+  }
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 14mm;
+  }
+
+  html,
+  body {
+    width: auto;
+  }
+
+  body {
+    background: #fff;
+    font-size: 10pt;
+    line-height: 1.45;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    display: block;
+  }
+
+  .sidebar,
+  .content {
+    box-shadow: none;
+    border-radius: 0;
+    background: #fff;
+  }
+
+  .sidebar {
+    position: static;
+    top: auto;
+    padding: 0 0 7mm;
+    border-bottom: 1px solid #d1d5db;
+  }
+
+  .sidebar-nav {
+    display: none;
+  }
+
+  .content {
+    padding: 7mm 0 0;
+    font-size: 9.8pt;
+    width: auto;
+    max-width: 100%;
+  }
+
+  .content h1 {
+    font-size: 19pt;
+    margin-bottom: 8px;
+  }
+
+  .content h2 {
+    margin-top: 7mm;
+    margin-bottom: 12px;
+    font-size: 13pt;
+    padding-bottom: 8px;
+    break-after: avoid-page;
+    page-break-after: avoid;
+  }
+
+  .content h3,
+  .content h4,
+  .content p,
+  .content ul {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  .content h3 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-size: 11pt;
+    padding-left: 10px;
+    border-left-width: 3px;
+  }
+
+  #experience ~ h3 {
+    padding-left: 18px;
+    border-left: none;
+  }
+
+  #experience ~ h3::before {
+    left: 2px;
+    width: 7px;
+    height: 7px;
+    border: 1px solid #fff;
+    box-shadow: 0 0 0 1px var(--brand);
+  }
+
+  .content h4 {
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-size: 10.5pt;
+  }
+
+  .content p,
+  .content ul {
+    margin: 8px 0;
+  }
+
+  .content a,
+  .content p,
+  .content li {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .download-btn {
+    display: none;
   }
 }
