@@ -38,7 +38,7 @@ Terrateam 사용 중 발견한 UI 이슈를 재현하고 수정한 기여입니�
 
 ### 씨제이올리브영주식회사
 
-- 기간: 2025.09 - 2026.03 (6개월)
+- 기간: 2025.09 - (진행중)
 - 직무: DevOps
 - 직급: 인턴
 - 주요 프로젝트: [개발자 내부 플랫폼(IDP) 구축](#개발자-내부-플랫폼idp-구축)
@@ -68,27 +68,18 @@ Terrateam 사용 중 발견한 UI 이슈를 재현하고 수정한 기여입니�
 
 #### 주요 업무 및 성과
 
-#### 1) DNS 트래픽 경로 사전 검증
+- **NodeLocal DNSCache 도입**
+  - Service Mesh(ztunnel) 충돌 가능성 사전 검증
+  - Cilium localRedirectPolicy 기반 구성 및 단계적 배포
 
-- Service Mesh(ztunnel)와 DNS 트래픽 경로 분리 확인
-- NodeLocal DNSCache 적용 시 mesh 충돌 가능성 사전 검증
+- **트러블슈팅**
+  - DaemonSet + hostNetwork 필수 요건 파악 (노드 레벨 DNS 가로채기)
+  - Cilium + AWS Secondary CIDR 환경 라우팅 정책 충돌 해결
 
-#### 2) Cilium localRedirectPolicy 기반 NodeLocal DNSCache 구성
-
-- 특정 Node 대상 단계적 배포 전략 수립 및 테스트
-- DaemonSet 배포 및 DNS 설정 자동화
-
-#### 3) 성능 및 안정성 검증
-
-- dnsperf 기반 DNS 성능 측정 및 분석
-- DNS 응답 속도 개선 (Cache Hit 기준: 0.293ms → 0.281ms, 4% 개선)
-- CoreDNS QPS 분산 효과 확인
-
-#### 4) 운영 안정성 확보
-
-- Node 단위 DNS 캐시 구조 도입으로 CoreDNS 부하 분산 (중앙 집중 → 노드별 분산)
-- CoreDNS 재시작/장애 시 캐시된 응답으로 서비스 지속성 확보
-- DNS 장애 영향 최소화 체계 구축
+- **성과**
+  - DNS 응답 속도 개선 (0.31ms → 0.28ms, 약 9% 향상)
+  - CoreDNS 부하 분산 구조 확립 (중앙 집중 → 노드별 분산)
+  - CoreDNS 재시작/장애 시 서비스 지속성 확보
 
 ### 개발자 내부 플랫폼(IDP) 구축
 
