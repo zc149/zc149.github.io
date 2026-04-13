@@ -55,9 +55,44 @@ Terrateam 사용 중 발견한 UI 이슈를 재현하고 수정한 기여입니�
 <div id="projects"></div>
 ## 프로젝트
 
+### NodeLocal DNSCache 도입을 통한 EKS DNS 안정성 개선
+
+- 기간: 2026.03 - 2026.04
+- 직무: DevOps
+- 기술스택: Kubernetes, EKS, Cilium, CoreDNS, Istio
+
+#### 프로젝트 배경
+
+- EKS 환경에서 CoreDNS Add-on Rolling Update 또는 장애 시 일시적 DNS 조회 실패 발생
+- DNS 성능 최적화 및 CoreDNS 부하 분산을 위한 Node 단위 캐시 도입
+
+#### 주요 업무 및 성과
+
+#### 1) DNS 트래픽 경로 사전 검증
+
+- Service Mesh(ztunnel)와 DNS 트래픽 경로 분리 확인
+- NodeLocal DNSCache 적용 시 mesh 충돌 가능성 사전 검증
+
+#### 2) Cilium localRedirectPolicy 기반 NodeLocal DNSCache 구성
+
+- 특정 Node 대상 단계적 배포 전략 수립 및 테스트
+- DaemonSet 배포 및 DNS 설정 자동화
+
+#### 3) 성능 및 안정성 검증
+
+- dnsperf 기반 DNS 성능 측정 및 분석
+- DNS 응답 속도 개선 (Cache Hit 기준: 0.293ms → 0.281ms, 4% 개선)
+- CoreDNS QPS 분산 효과 확인
+
+#### 4) 운영 안정성 확보
+
+- Node 단위 DNS 캐시 구조 도입으로 CoreDNS 부하 분산 (중앙 집중 → 노드별 분산)
+- CoreDNS 재시작/장애 시 캐시된 응답으로 서비스 지속성 확보
+- DNS 장애 영향 최소화 체계 구축
+
 ### 개발자 내부 플랫폼(IDP) 구축
 
-- 기간: 2025.09 - 2026.01
+- 기간: 2025.09 - (진행중)
 - 직무: DevOps
 - 기술스택: React, Node.js, TypeScript, Kubernetes, Helm, Argo CD, AWS
 
