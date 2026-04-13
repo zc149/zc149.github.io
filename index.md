@@ -11,7 +11,7 @@ title: Portfolio
 
 - Backend: Spring, Node.js, Go
 - Frontend: React, TypeScript
-- Infra/DevOps: Kubernetes, Helm, Argo CD, AWS
+- Infra/DevOps: Kubernetes, Helm, Argo CD, Terraform, AWS
 - DB: MySQL, Oracle, PostgreSQL
 
 <div id="oss"></div>
@@ -41,7 +41,10 @@ Terrateam 사용 중 발견한 UI 이슈를 재현하고 수정한 기여입니�
 - 기간: 2025.09 - (진행중)
 - 직무: DevOps
 - 직급: 인턴
-- 주요 프로젝트: [개발자 내부 플랫폼(IDP) 구축](#개발자-내부-플랫폼idp-구축)
+- 주요 프로젝트:
+  - [EKS 마이그레이션을 위한 신규 클러스터 구축](#eks-마이그레이션을-위한-신규-클러스터-구축)
+  - [NodeLocal DNSCache 도입을 통한 EKS DNS 안정성 개선](#nodelocal-dnscache-도입을-통한-eks-dns-안정성-개선)
+  - [개발자 내부 플랫폼(IDP) 구축](#개발자-내부-플랫폼idp-구축)
 
 ### 주식회사스노우온카드
 
@@ -55,9 +58,40 @@ Terrateam 사용 중 발견한 UI 이슈를 재현하고 수정한 기여입니�
 <div id="projects"></div>
 ## 프로젝트
 
+### EKS 마이그레이션을 위한 신규 클러스터 구축
+
+- 기간: 2026.04
+- 직무: DevOps
+- 기술스택: Terraform, EKS, VPC, Cilium, Istio, Karpenter, AWS
+
+#### 프로젝트 배경
+
+- 마이그레이션을 위한 신규 EKS 클러스터 구축
+
+#### 주요 업무 및 성과
+
+- **IaC 기반 EKS 클러스터 구축**
+  - Terraform 기반 VPC, Security Group, EKS 클러스터 프로비저닝
+  - Secondary CIDR를 활용한 Pod 네트워크 분리 구성
+  - Multi-AZ HA 구조 설계 및 구축
+
+- **CNI 및 Service Mesh 구성**
+  - Cilium CNI 도입 (VPC CNI 대체)
+  - Istio 기반 Service Mesh 구성
+  - NLB 기반 Public/Private Gateway 구조 설계 및 HTTPRoute 구성
+  - External DNS 멀티 도메인 설정
+
+- **Karpenter 기반 오토스케일링 구축**
+  - Karpenter를 활용한 노드 자동 확장/축소 체계 구축
+  - 태그 기반 서브넷/Security Group 자동 탐지 구성
+
+- **성과**
+  - EKS 1.35 마이그레이션 준비 환경 구축 완료
+  - IaC 기반 인프라 코드화로 재현 가능한 환경 확보
+
 ### NodeLocal DNSCache 도입을 통한 EKS DNS 안정성 개선
 
-- 기간: 2026.03 - 2026.04
+- 기간: 2026.03
 - 직무: DevOps
 - 기술스택: Kubernetes, EKS, Cilium, CoreDNS, Istio
 
