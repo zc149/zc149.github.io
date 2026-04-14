@@ -1,0 +1,12 @@
+﻿services:
+  jekyll:
+    image: jekyll/jekyll:4
+    container_name: zc149-jekyll
+    stdin_open: true
+    tty: true
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./:/srv/jekyll
+    command: >-
+      sh -c "gem list -i webrick || gem install webrick --no-document; jekyll serve --host 0.0.0.0 --watch --force_polling"
