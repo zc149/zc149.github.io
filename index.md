@@ -42,6 +42,7 @@ Terrateam 사용 중 발견한 UI 이슈를 재현하고 수정한 기여입니�
 - 직무: DevOps
 - 직급: 인턴
 - 주요 프로젝트:
+  - [OneUptime 기반 Incident Management 전환](#oneuptime-기반-incident-management-전환)
   - [Gradle 빌드 캐시 최적화](#gradle-빌드-캐시-최적화)
   - [EKS 마이그레이션을 위한 신규 클러스터 구축](#eks-마이그레이션을-위한-신규-클러스터-구축)
   - [NodeLocal DNSCache 도입을 통한 EKS DNS 안정성 개선](#nodelocal-dnscache-도입을-통한-eks-dns-안정성-개선)
@@ -59,6 +60,34 @@ Terrateam 사용 중 발견한 UI 이슈를 재현하고 수정한 기여입니�
 <div id="projects"></div>
 ## 프로젝트
 
+### OneUptime 기반 Incident Management 전환
+
+- 기간: 2026.05
+- 직무: DevOps
+- 기술스택: Incident Management, On-call, Alerting
+
+#### 프로젝트 배경
+
+- 기존 PagerDuty 기반 On-call 및 Incident Management 운영 시 사용자 수 증가에 따라 월 구독 비용 부담이 커져 오픈소스 대체 솔루션 검토 필요
+- 신규 프로젝트 적용을 시작으로 기존 프로젝트의 PagerDuty 사용도 단계적으로 OneUptime으로 전환 필요
+
+#### 주요 업무 및 성과
+
+- **오픈소스 Incident Management 솔루션 PoC**
+  - PagerDuty 대체 후보로 OneUptime 기능 검토
+  - On-call, Incident, Alert Routing, Escalation Policy 등 핵심 운영 기능 검증
+  - 신규 프로젝트 오픈 시 OneUptime을 함께 적용하여 실제 운영 환경에 도입
+
+- **운영 정책 및 사용 가이드 문서화**
+  - Incident 생성, 담당자 지정, 에스컬레이션, 알림 처리 흐름 문서화
+  - On-call 정책과 장애 대응 워크플로우를 정리하여 개발팀 및 협력팀에 공유
+  - PagerDuty 중심의 장애 대응 프로세스를 OneUptime 기반으로 전환
+
+- **성과**
+  - PagerDuty 의존도 축소 및 오픈소스 기반 Incident Management 체계 구축
+  - 100명 사용 기준 월 $4,000 수준의 예상 라이선스 비용 절감 예정
+  - 개발팀과 협력팀이 공통으로 참고할 수 있는 On-call 및 Incident 대응 프로세스 정립
+
 ### Gradle 빌드 캐시 최적화
 
 - 기간: 2026.05
@@ -67,7 +96,7 @@ Terrateam 사용 중 발견한 UI 이슈를 재현하고 수정한 기여입니�
 
 #### 프로젝트 배경
 
-- 여러 레포의 Gradle 캐시가 하나의 EFS 경로에 누적되며 캐시 크기와 탐색/동기화 시간이 증가했고, EFS I/O 병목과 비용 부담을 줄이기 위한 레포 단위 캐시 분리 구조가 필요했습니다.
+- 여러 레포의 Gradle 캐시가 하나의 EFS 경로에 누적되며 캐시 크기와 탐색/동기화 시간이 증가했고, EFS I/O 병목과 비용 부담을 줄이기 위한 레포 단위 캐시 분리 구조가 필요
 
 #### 주요 업무 및 성과
 
