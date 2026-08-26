@@ -68,17 +68,19 @@ Terrateam 사용 중 발견한 UI 이슈를 재현하고 수정한 기여입니�
 <div id="projects"></div>
 ## 프로젝트
 
-### 내부 개발자 플랫폼(IDP) 구축
+### 씨제이올리브영주식회사
+
+#### 내부 개발자 플랫폼(IDP) 구축
 
 - 기간: 2025.09 - 2026.02
 - 역할: Backstage 기반 IDP 개발 및 DevOps 플랫폼 구축
 - 기술: Backstage, React, Node.js, TypeScript, Kubernetes, Helm, Argo CD
 
-#### 배경
+##### 배경
 
 기존 SaaS 기반 개발자 포털은 조직 요구사항에 맞춘 기능 확장에 한계가 있었고, 신규 서비스 생성 및 배포 과정에서 개발자가 GitOps Repository의 Kubernetes Values와 배포 설정을 직접 작성해야 했습니다. 이로 인해 프로젝트 초기 설정 편차가 발생하고, 신규 서비스 배포까지 반복적인 수작업이 필요했습니다.
 
-#### 수행 내용
+##### 수행 내용
 
 - Backstage 기반 내부 개발자 플랫폼을 구축하여 기존 Port.io 기반 환경을 대체
 - Scaffolder Template으로 Repository 생성, Kubernetes Values, Argo CD 배포 설정 생성 과정을 자동화
@@ -86,46 +88,46 @@ Terrateam 사용 중 발견한 UI 이슈를 재현하고 수정한 기여입니�
 - 기존 Repository를 Backstage Catalog로 마이그레이션하여 서비스 메타데이터와 Repository를 통합 관리
 - Argo CD, k6 Operator, Spring Batch 등 주요 개발·운영 도구를 Backstage Plugin으로 통합
 
-#### 성과
+##### 성과
 
 - 신규 서비스 생성부터 배포까지 걸리는 시간을 약 5분 수준으로 단축
 - Repository 생성 경로를 Backstage로 일원화하여 표준화된 개발 프로세스 적용
 - 개발자가 여러 운영 도구를 개별적으로 접근하지 않고 하나의 포털에서 배포, 성능 테스트, 배치 관리 업무를 수행할 수 있도록 DX 개선
 - 서비스 생애주기와 메타데이터를 Backstage Catalog에서 일관되게 관리할 수 있는 기반 구축
 
-### EKS 환경에 NodeLocal DNS 도입
+#### EKS 환경에 NodeLocal DNS 도입
 
 - 기간: 2026.04
 - 역할: EKS DNS 안정성 개선 및 클러스터 운영 안정화
 - 기술: EKS, Kubernetes, CoreDNS, NodeLocal DNSCache
 
-#### 배경
+##### 배경
 
 EKS 환경에서 AWS Managed Add-on CoreDNS의 롤링 업데이트 또는 일시적인 장애가 발생하면 CoreDNS 응답 지연과 DNS Lookup 실패로 인해 Pod 간 통신에 영향을 줄 수 있었습니다. CoreDNS 의존도를 낮추고 Node 단위에서 안정적으로 DNS 요청을 처리할 수 있는 구조가 필요했습니다.
 
-#### 수행 내용
+##### 수행 내용
 
 - EKS 환경에 NodeLocal DNS를 도입하여 DNS 요청을 Node 단위 Local Cache에서 우선 처리하도록 구성
 - 기존에 조회한 DNS 레코드는 Local Cache에서 응답하도록 설정하여 CoreDNS 장애 또는 업데이트 상황의 서비스 영향 최소화
 - CoreDNS로 전달되는 DNS 트래픽을 줄일 수 있도록 Node 단위 DNS Proxy 구조 구성
 
-#### 성과
+##### 성과
 
 - CoreDNS 장애 또는 롤링 업데이트 시 DNS Lookup 실패로 인한 Pod 간 통신 영향 완화
 - DNS 요청을 Node 단위로 분산하여 CoreDNS 부하 감소
 - 클러스터 DNS 응답 안정성과 서비스 지속성 개선
 
-### EKS 신규 클러스터 구축 및 서비스 마이그레이션
+#### EKS 신규 클러스터 구축 및 서비스 마이그레이션
 
 - 기간: 2026.04
 - 역할: 신규 EKS 클러스터 구축, 네트워크 구조 개선, 서비스 마이그레이션
 - 기술: Terraform, EKS, VPC, Secondary CIDR, Route53, AWS
 
-#### 배경
+##### 배경
 
 기존 운영 클러스터는 네트워크 구조를 직접 변경하기 어려웠고, Pod IP 확장성 확보를 위해 Secondary IP 대역이 적용된 신규 EKS 클러스터가 필요했습니다. 또한 환경별로 클러스터 구성과 Terraform 코드가 다르게 관리되어 운영 일관성과 유지보수성 개선이 필요했습니다.
 
-#### 수행 내용
+##### 수행 내용
 
 - Secondary IP 대역이 적용된 신규 EKS 클러스터를 Terraform 기반으로 구축
 - 신규 클러스터 검증 후 기존 클러스터에서 운영 중인 서비스를 단계적으로 이전
@@ -133,23 +135,23 @@ EKS 환경에서 AWS Managed Add-on CoreDNS의 롤링 업데이트 또는 일시
 - Dev, Stg, Prd 순서로 마이그레이션을 진행하여 운영 서비스 영향을 최소화
 - 환경별로 상이했던 클러스터 구성과 Terraform 코드를 표준화
 
-#### 성과
+##### 성과
 
 - Secondary IP 기반 네트워크 구조를 적용하여 Pod IP 부족 문제를 해결하고 클러스터 확장성 확보
 - DNS 가중치 기반 단계적 트래픽 전환으로 서비스 영향 없이 마이그레이션 수행
 - EKS 클러스터 구성과 IaC 관리 방식을 표준화하여 운영 효율성과 유지보수성 향상
 
-### 오픈소스 기반 Incident Management 시스템 내제화
+#### 오픈소스 기반 Incident Management 시스템 내제화
 
 - 기간: 2026.05
 - 역할: Incident Management 솔루션 검토, On-Call 및 Alert 대응 프로세스 구축
 - 기술: OneUptime, Incident Management, On-Call, Alerting, Slack
 
-#### 배경
+##### 배경
 
 개발 인원 증가에 따라 PagerDuty 라이선스 비용 부담이 커지고 있었고, Alert 발생부터 Incident 대응까지 자체 운영 가능한 오픈소스 기반 Incident Management 및 On-Call 시스템이 필요했습니다.
 
-#### 수행 내용
+##### 수행 내용
 
 - 오픈소스 Incident Management 솔루션의 On-Call, Escalation, Alert 연계, 운영 편의성을 비교·검증
 - PagerDuty 대체 솔루션으로 OneUptime을 선정하고 신규 프로젝트에 적용
@@ -157,80 +159,82 @@ EKS 환경에서 AWS Managed Add-on CoreDNS의 롤링 업데이트 또는 일시
 - Alert Severity에 따라 On-Call 담당자를 자동 호출하고 Incident를 자동 생성하도록 구성
 - Incident 발생 시 Slack 전용 채널을 자동 생성하고 담당자 및 관련자를 자동 초대하는 협업 프로세스 구현
 
-#### 성과
+##### 성과
 
 - PagerDuty를 대체할 수 있는 오픈소스 기반 Incident Management 운영 환경 마련
 - Alert Severity 기반 Escalation과 Incident 자동 생성으로 장애 대응 프로세스 표준화
 - 개발자뿐만 아니라 비개발 직군도 Incident 대응 과정에 참여할 수 있는 Slack 기반 협업 체계 구축
 
-### Gradle 빌드 캐시 최적화
+#### Gradle 빌드 캐시 최적화
 
 - 기간: 2026.05
 - 역할: CI/CD 빌드 캐시 구조 개선 및 빌드 시간 최적화
 - 기술: GitHub Actions ARC, Kubernetes, AWS, S3, EFS, Gradle
 
-#### 배경
+##### 배경
 
 여러 Repository의 Gradle 캐시가 하나의 EFS 경로에 누적되면서 캐시 크기와 탐색 시간이 증가하고 있었습니다. 이로 인해 EFS I/O 병목과 비용 부담이 발생했고, Repository 단위로 캐시를 분리하면서도 서비스별 Workflow 수정 범위를 최소화할 수 있는 공통 캐시 구조가 필요했습니다.
 
-#### 수행 내용
+##### 수행 내용
 
 - 기존 EFS 기반 Gradle 캐시 저장 구조를 Repository별 S3 경로 기반 구조로 전환
 - GitHub Actions Runner Hook을 활용하여 Job 시작 시 캐시 복원, Job 종료 시 캐시 저장 과정을 자동화
 - Runner Pod 생명주기와 캐시 동기화 시점을 분리하여 Workflow 변경 없이 Runner 레벨에서 공통 캐시 정책 적용
 - 서비스별 CI Workflow에 반복 로직을 추가하지 않고 ARC Runner 기반으로 캐시 라이프사이클 제어
 
-#### 성과
+##### 성과
 
 - Gradle 빌드 시간을 약 39% 단축
 - EFS I/O 병목을 완화하고 Gradle 캐시 저장 구조의 운영 비용 부담 감소
 - Repository별 캐시 분리 구조를 적용하여 캐시 관리 안정성과 재사용성 개선
 
-### ECR Multi-Region 및 비용 최적화
+#### ECR Multi-Region 및 비용 최적화
 
 - 기간: 2026.07
 - 역할: ECR Multi-Region 구조 개선 및 Container Image 비용 최적화
 - 기술: Amazon ECR, ECR Pull Through Cache, ECR Lifecycle Policy, EKS, CI/CD
 
-#### 배경
+##### 배경
 
 Virginia EKS Cluster에서 Seoul 리전의 ECR Container Image를 직접 Pull하면서 Cross-Region Data Transfer 비용이 발생하고 있었습니다. 또한 CI/CD 과정에서 Container Image가 지속적으로 누적되면서 ECR Storage 비용이 증가하고 있어, 운영 배포 이력은 보호하면서 불필요한 이미지를 정리할 수 있는 구조가 필요했습니다.
 
-#### 수행 내용
+##### 수행 내용
 
 - Virginia 리전에 ECR Pull Through Cache를 구성하여 반복적인 Image Pull을 리전 내부에서 처리하도록 개선
 - Production 배포 시 `prd-YYYYMMDD-commitHash` 형식의 Tag를 추가하여 실제 운영 배포 Image와 Rollback 이력 보호
 - ECR Lifecycle Policy를 적용하여 운영 배포 이미지를 제외한 30일 이상 경과 Image 자동 삭제 구성
 - Cross-Region Data Transfer 비용과 ECR Storage 비용을 함께 줄일 수 있도록 Multi-Region Image Pull 구조와 보관 정책 개선
 
-#### 성과
+##### 성과
 
 - Virginia EKS Cluster의 반복적인 Image Pull을 리전 내부에서 처리하도록 개선하여 Cross-Region Data Transfer 비용 절감
 - 운영 배포 Image 및 Rollback 이력을 보호하면서 불필요한 CI/CD Image 누적 문제 완화
 - ECR 관련 월 비용을 약 $300에서 $200 수준으로 낮춰 약 33% 절감
 
-### Token 기반 비접촉 결제 솔루션 구축 (HCE / Scan to Pay)
+### 주식회사스노우온카드
+
+#### Token 기반 비접촉 결제 솔루션 구축 (HCE / Scan to Pay)
 
 - 기간: 2025.06 - 2025.07
 - 직무: 서버개발
 - 기술스택: Spring, MySQL
 - 설명: Visa, Mastercard 등 국제 브랜드의 토큰 기반 결제 프로세스를 구현하고, HCE 및 QR 기반 Scan to Pay 기능을 포함한 TLCM 솔루션 개발
 
-#### 주요 업무 및 성과
+##### 주요 업무 및 성과
 
 - EMVCo 기반 Visa / Mastercard 결제 흐름 분석 및 토큰화 프로세스 구현 (Provisioning, Payment, Lifecycle 관리)
 - Spring 기반 백엔드 모듈 설계 및 구현 (TSP 연동, HCE 카드 생성, QR 결제 요청 처리 등)
 - 카드사 및 브랜드사 요구사항에 맞춘 TLCM (Transaction Life Cycle Management) 기능 구현
 - 테스트 시뮬레이션 환경 구축 (APDU 커맨드/응답 처리)
 
-### 간편결제 통합 인터페이스 구축(SI)
+#### 간편결제 통합 인터페이스 구축(SI)
 
 - 기간: 2025.02 - 2025.05
 - 직무: 서버개발
 - 기술스택: React, TypeScript, Spring, Oracle
 - 설명: PG사 간편결제 등록·승인·취소 API를 통합 관리하는 백엔드 인터페이스와 어드민 시스템 구축
 
-#### 주요 업무 및 성과
+##### 주요 업무 및 성과
 
 - 주요 PG사 간편결제 연동 API 설계 및 구현 (Spring 기반 서버 개발)
 - TO-BE 정규화 DB 스키마 재설계 및 데이터 마이그레이션
