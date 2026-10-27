@@ -8,36 +8,38 @@
     <link rel="stylesheet" href="/assets/css/site.css">
   </head>
   <body>
+    <a class="skip-link" href="#main-content">본문으로 이동</a>
     <div class="page">
-      <aside class="sidebar">
+      <header class="site-header">
         <div class="profile">
           {% if site.data.profile.profile_image %}
-          <img class="profile-image" src="{{ site.data.profile.profile_image }}" alt="{{ site.data.profile.name }}">
+          <img class="profile-image" src="{{ site.data.profile.profile_image }}" alt="{{ site.data.profile.name }} 프로필 사진" width="160" height="160">
           {% else %}
           <div class="profile-fallback">{{ site.data.profile.name | slice: 0 }}</div>
           {% endif %}
-          <h1 class="name">{{ site.data.profile.name }}</h1>
-          <p class="meta">{{ site.data.profile.description }}</p>
-          <p class="meta-line"><span class="icon">📞</span>{{ site.data.profile.phone }}</p>
-          <p class="meta-line"><span class="icon">✉️</span><a href="mailto:{{ site.data.profile.email }}">{{ site.data.profile.email }}</a></p>
-          <p class="meta-line"><img class="icon-svg" src="/assets/icons/github.svg" alt=""><a href="{{ site.data.profile.github }}" target="_blank" rel="noreferrer noopener">GitHub</a></p>
-          <a class="download-btn" href="{{ site.data.profile.resume_pdf }}" download>PDF 다운로드</a>
+          <div class="profile-details">
+            <h1 class="name">{{ site.data.profile.name }}</h1>
+            <p class="role">DevOps Engineer</p>
+            <div class="contact-list">
+              <a href="tel:{{ site.data.profile.phone }}">{{ site.data.profile.phone }}</a>
+              <a href="mailto:{{ site.data.profile.email }}">{{ site.data.profile.email }}</a>
+              <a href="{{ site.data.profile.github }}" target="_blank" rel="noreferrer noopener">github.com/zc149</a>
+            </div>
+            <a class="download-btn" href="{{ site.data.profile.resume_pdf }}" download>PDF 다운로드 <span aria-hidden="true">↓</span></a>
+          </div>
         </div>
-        <nav class="sidebar-nav">
-          <h2 class="nav-title">목차</h2>
-          <ul class="nav-list">
-            <li><a href="#oss">오픈소스 기여</a></li>
-            <li><a href="#experience">경력사항</a></li>
-            <li><a href="#projects">프로젝트</a></li>
-            <li><a href="#certs">자격증</a></li>
-            <li><a href="#language">어학</a></li>
-            <li><a href="#education">학력</a></li>
-          </ul>
+        <nav class="section-nav" aria-label="포트폴리오 목차">
+          <a href="#experience">경력사항</a>
+          <a href="#projects">대표 경험</a>
+          <a href="#oss">오픈소스 기여</a>
+          <a href="#certs">자격증</a>
+          <a href="#education">학력</a>
         </nav>
-      </aside>
-      <main class="content">
+      </header>
+      <main id="main-content" class="content">
         {{ content }}
       </main>
+      <footer class="site-footer">{{ site.data.profile.name }} · DevOps Portfolio</footer>
     </div>
   </body>
 </html>
